@@ -1,9 +1,21 @@
 <template>
-  <h1>CheckOut</h1>
+  <main>
+    <checkout-component></checkout-component>
+    <checkout-summary></checkout-summary>
+  </main>
 </template>
 
-<script>
-export default {};
+<script setup>
+import CheckoutComponent from '../components/ui/checkout/CheckoutComponent.vue';
+import CheckoutSummary from '../components/ui/checkout/CheckoutSummary.vue';
 </script>
 
-<style></style>
+<style scoped>
+main {
+  padding: var(--content-padding);
+  padding-top: 3rem;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  gap: 2rem;
+}
+</style>

@@ -7,7 +7,8 @@
         <h3>${{ props.cartItem.product.price }}</h3>
       </div>
     </div>
-    <base-number v-model="productAmount" mode="cart"></base-number>
+    <base-number v-if="!props.type" v-model="productAmount" mode="cart"></base-number>
+    <h4 v-if="props.type === 'summary'">x{{ props.cartItem.amount }}</h4>
   </div>
 </template>
 
@@ -16,7 +17,7 @@ import { ref, watch } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
-const props = defineProps(['cartItem']);
+const props = defineProps(['cartItem', 'type']);
 const productAmount = ref(props.cartItem.amount);
 
 watch(productAmount, () => {
@@ -60,6 +61,10 @@ h2 {
 }
 h3 {
   font-size: 14px;
+  color: var(--color-white-500);
+}
+h4 {
+  font-size: 17px;
   color: var(--color-white-500);
 }
 </style>

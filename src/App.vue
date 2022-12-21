@@ -21,7 +21,7 @@ import { ref, reactive, computed, watch } from 'vue';
 
   --color-black-100: hsl(0, 0%, 0%);
   --color-black-200: hsl(0, 3%, 10%);
-  --color-black-200-shadow: hsl(0, 3%, 10%, 0.4);
+  --color-black-200-shadow: hsl(0, 3%, 10%, 0.2);
 
   --color-white-100: hsl(0, 0%, 100%);
   --color-white-200: hsl(0, 0%, 95%);
@@ -29,6 +29,8 @@ import { ref, reactive, computed, watch } from 'vue';
   --color-white-400: hsl(0, 0%, 75%);
   --color-white-500: hsl(0, 0%, 60%);
 
+  --color-background: hsl(0, 0%, 97%);
+  --card-color: hsl(0, 0%, 100%);
   --color-none: hsl(0, 0%, 0%, 0);
 
   --header-height: 90px;
@@ -36,6 +38,7 @@ import { ref, reactive, computed, watch } from 'vue';
 }
 body {
   overflow-x: hidden;
+  background: var(--color-background);
 }
 * {
   font-family: var(--font-main);

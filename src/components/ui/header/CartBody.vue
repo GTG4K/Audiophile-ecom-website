@@ -15,7 +15,7 @@
       <h2 class="total">Total</h2>
       <h2 class="price">${{ cartPrice }}</h2>
     </div>
-    <div class="action">
+    <div class="action" @click="emitToggle">
       <base-button theme="main" size="full" redirect="/checkout">CHECKOUT</base-button>
     </div>
   </div>
@@ -28,6 +28,11 @@ import { computed } from 'vue';
 
 const store = useStore();
 
+const emit = defineEmits(['emitToggle']);
+
+function emitToggle() {
+  emit('emitToggle');
+}
 const cartProducts = computed(() => {
   return store.getters.getCart;
 });

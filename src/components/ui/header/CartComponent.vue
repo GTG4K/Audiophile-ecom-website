@@ -1,7 +1,7 @@
 <template>
   <div class="icon-holder" :class="isActive">
     <img @click="toggleCart" src="../../../assets/shared/desktop/icon-cart.svg" alt="" />
-    <cart-body></cart-body>
+    <cart-body @emitToggle="toggleCart"></cart-body>
   </div>
 </template>
 
