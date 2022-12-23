@@ -44,6 +44,7 @@ const cardDirection = computed(() => {
 img {
   display: block;
   border-radius: 8px;
+  background: var(--color-white-200);
 }
 h2 {
   font-size: 40px;
@@ -62,5 +63,47 @@ p {
   letter-spacing: 8px;
   font-weight: 400;
   color: var(--color-main-100);
+}
+
+@media only screen and (max-width: 750px) {
+  .product-card {
+    flex-direction: column;
+    align-items: center;
+  }
+  .product-card.invert {
+    flex-direction: column;
+  }
+  .product-card > * {
+    width: 100%;
+    object-fit: contain;
+  }
+  .product {
+    align-items: center;
+    text-align: center;
+    width: 80%;
+  }
+  img {
+    height: 350px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  img {
+    height: 250px;
+  }
+  .product {
+    gap: 1rem;
+  }
+  .product-card {
+    gap: 0.5rem;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  p {
+    color: var(--color-white-500);
+    line-height: 1.4;
+    font-size: 15px;
+  }
 }
 </style>

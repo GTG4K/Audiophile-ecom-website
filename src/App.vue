@@ -34,6 +34,7 @@ import { ref, reactive, computed, watch } from 'vue';
   --card-color: hsl(0, 0%, 100%);
   --color-none: hsl(0, 0%, 0%, 0);
 
+  --category-view-padding: 4rem 0 0 0;
   --header-height: 90px;
   --content-padding: 0 14rem;
 }
@@ -47,6 +48,7 @@ body {
 @media only screen and (max-width: 1550px) {
   :root {
     --content-padding: 0 6rem;
+    --category-view-padding: 3rem 0 0 0;
   }
 }
 @media only screen and (max-width: 1200px) {
@@ -57,6 +59,7 @@ body {
 @media only screen and (max-width: 900px) {
   :root {
     --content-padding: 0 1rem;
+    --category-view-padding: 2rem 0 0 0;
   }
 }
 </style>

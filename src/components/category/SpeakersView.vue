@@ -18,9 +18,9 @@ const speakers = store.getters.getSpeakers;
 
 <style scoped>
 .products {
-  padding: 4rem 0 7rem 0;
+  padding: var(--category-view-padding);
   display: flex;
   flex-direction: column;
-  gap: 8rem;
+  gap: 4rem;
 }
 </style>

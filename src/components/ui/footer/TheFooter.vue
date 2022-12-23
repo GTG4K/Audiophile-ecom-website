@@ -39,6 +39,7 @@ function goHome() {
 
 <style scoped>
 footer {
+  position: relative;
   background: var(--color-black-200);
   padding: var(--content-padding);
   margin-top: 5rem;
@@ -57,6 +58,7 @@ a {
   color: var(--color-white-100);
   text-decoration: none;
   font-size: 15px;
+  font-weight: 600;
   letter-spacing: 3px;
   transition: 0.2s ease;
 }
@@ -89,5 +91,43 @@ h2 {
   font-size: 16px;
   font-weight: 500;
   color: var(--color-white-400);
+}
+
+@media only screen and (max-width: 850px) {
+  .footer-nav {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .logo {
+    width: 125px;
+  }
+  nav {
+    gap: 1rem;
+  }
+  .footer-extras {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .footer-extras p {
+    width: 90%;
+    font-weight: 500;
+  }
+}
+@media only screen and (max-width: 490px) {
+  .footer-nav {
+    align-items: center;
+  }
+  .footer-extras {
+    align-items: center;
+    text-align: center;
+  }
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+  h2 {
+    text-align: center;
+  }
 }
 </style>
