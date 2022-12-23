@@ -30,6 +30,7 @@ const updatePath = function () {
       currentRoute.value = null;
     }
   }
+  window.scrollTo(0, 0);
 };
 
 const updateWidth = function () {
@@ -79,8 +80,6 @@ header {
 }
 .home {
   background: var(--color-black-200);
-}
-@media only screen and (max-width: 1000px) {
 }
 @media only screen and (max-width: 450px) {
   header {
