@@ -104,4 +104,11 @@ h2.title {
   font-size: 12px;
   font-weight: 700;
 }
+@media only screen and (max-width: 600px) {
+  .form-duo {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem 1.2rem;
+  }
+}
 </style>

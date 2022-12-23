@@ -18,4 +18,9 @@ main {
   grid-template-columns: 70% 30%;
   gap: 2rem;
 }
+@media only screen and (max-width: 1000px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
 </style>

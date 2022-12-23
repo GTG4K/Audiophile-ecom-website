@@ -56,4 +56,19 @@ h3 {
 p {
   color: var(--color-white-500);
 }
+@media only screen and (max-width: 850px) {
+  .features-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .in-the-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .in-the-box {
+    grid-template-columns: 1fr;
+  }
+}
 </style>

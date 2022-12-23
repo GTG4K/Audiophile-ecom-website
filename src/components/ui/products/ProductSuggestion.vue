@@ -1,6 +1,6 @@
 <template>
   <div class="suggestion">
-    <img :src="props.suggestion.image.desktop" alt="" />
+    <img :src="suggestionImage" alt="" />
     <h2>{{ props.suggestion.name }}</h2>
     <base-button theme="main" :redirect="`/product/${props.suggestion.slug}`">
       SEE PRODUCT
@@ -9,7 +9,19 @@
 </template>
 
 <script setup>
-const props = defineProps(['suggestion']);
+import { computed } from 'vue';
+
+const props = defineProps(['suggestion', 'size']);
+
+const suggestionImage = computed(() => {
+  if (props.size === 'desktop') {
+    return props.suggestion.image.desktop;
+  } else if (props.size === 'tablet') {
+    return props.suggestion.image.tablet;
+  } else {
+    return props.suggestion.image.mobile;
+  }
+});
 </script>
 
 <style scoped>
@@ -21,7 +33,6 @@ const props = defineProps(['suggestion']);
   gap: 1rem;
 }
 img {
-  display: block;
   border-radius: 8px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="product-card">
-    <img :src="product.image.desktop" :alt="product.name" />
+    <img :src="productImage" :alt="product.name" />
     <div class="product">
       <div class="title">
         <h2 class="tag-line" v-if="product.new === true">NEW PRODUCT</h2>
@@ -18,7 +18,7 @@
     </div>
   </div>
   <product-features :product="product"></product-features>
-  <product-images :images="product.gallery"></product-images>
+  <product-images :images="product.gallery" :size="size"></product-images>
   <div class="suggestions-container">
     <h2>YOU MAY ALSO LIKE</h2>
     <div class="suggestions">
@@ -26,6 +26,7 @@
         v-for="suggestion in product.others"
         :key="suggestion.slug"
         :suggestion="suggestion"
+        :size="size"
       ></product-suggestion>
     </div>
   </div>
@@ -42,10 +43,21 @@ import { ref, computed, onMounted, watch } from 'vue';
 const route = useRoute();
 const store = useStore();
 
+const width = ref(window.innerWidth);
 let path = route.path.split('/');
 const realPath = ref(path[2]);
 
 const productAmount = ref(1);
+
+const updateWidth = function () {
+  window.addEventListener('resize', () => {
+    width.value = window.innerWidth;
+  });
+};
+
+onMounted(() => {
+  updateWidth();
+});
 
 watch(
   () => route.path,
@@ -54,6 +66,26 @@ watch(
     realPath.value = path[2];
   }
 );
+
+const productImage = computed(() => {
+  if (size.value === 'desktop') {
+    return product.value.image.desktop;
+  } else if (size.value === 'tablet') {
+    return product.value.image.tablet;
+  } else {
+    return product.value.image.mobile;
+  }
+});
+
+const size = computed(() => {
+  if (width.value > 1000) {
+    return 'desktop';
+  } else if (width.value > 600) {
+    return 'tablet';
+  } else {
+    return 'mobile';
+  }
+});
 
 const product = computed(() => {
   const products = store.getters.getProducts;
@@ -133,5 +165,28 @@ p {
 .action-buttons {
   display: flex;
   gap: 1rem;
+}
+@media only screen and (max-width: 1000px) {
+  .suggestions {
+    gap: 1rem;
+  }
+}
+@media only screen and (max-width: 700px) {
+  h2 {
+    font-size: 30px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .product-card {
+    flex-direction: column;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .product-card > * {
+    width: 100%;
+  }
+  .suggestions {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
