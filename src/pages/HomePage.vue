@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import ProductsPreview from '../components/ui/products/ProductsPreview.vue';
+import ProductsPreview from '../components/ui/preview/ProductsPreview.vue';
 </script>
 
 <style scoped>
