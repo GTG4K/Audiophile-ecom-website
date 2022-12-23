@@ -1,39 +1,18 @@
 <template>
   <header :class="headerStyling">
-    <div class="main">
-      <img
-        class="logo"
-        @click="goHome"
-        src="../../../assets/shared/desktop/logo.svg"
-        alt=""
-      />
-      <nav>
-        <router-link to="/home">HOME</router-link>
-        <router-link to="/category/headphones">HEADPHONES</router-link>
-        <router-link to="/category/speakers">SPEAKERS</router-link>
-        <router-link to="/category/earphones">EARPHONES</router-link>
-      </nav>
-      <cart-component></cart-component>
-    </div>
-    <div v-if="currentRoute === 'home'" class="selected-page">
-      <header-product></header-product>
-      <img
-        class="product-image"
-        src="../../../assets/home/desktop/image-hero.jpg"
-        alt=""
-      />
-    </div>
-    <div v-if="currentRoute != 'home' && currentRoute" class="selected-page">
-      <h2>{{ currentRoute }}</h2>
-    </div>
+    <header-nav :size="headerSize" :route="currentRoute"></header-nav>
+    <header-product :size="headerSize" :route="currentRoute"></header-product>
   </header>
 </template>
 
 <script setup>
-import CartComponent from './CartComponent.vue';
+import FiltersComponent from '../Filters/FiltersComponent.vue';
 import HeaderProduct from './HeaderProduct.vue';
+import HeaderNav from './HeaderNav.vue';
 import { useRoute, useRouter } from 'vue-router';
 import { ref, onMounted, watch, computed } from 'vue';
+
+const width = ref(window.innerWidth);
 
 const currentRoute = ref('');
 const route = useRoute();
@@ -53,9 +32,16 @@ const updatePath = function () {
   }
 };
 
+const updateWidth = function () {
+  window.addEventListener('resize', () => {
+    width.value = window.innerWidth;
+  });
+};
+
 //set initial route path on page load
 onMounted(() => {
   updatePath();
+  updateWidth();
 });
 
 //Watch for changes in route path
@@ -69,71 +55,37 @@ watch(
 function goHome() {
   router.push('/home');
 }
+
 const headerStyling = computed(() => {
   return { home: currentRoute.value === 'home' };
+});
+
+const headerSize = computed(() => {
+  if (width.value > 1000) {
+    return 'desktop';
+  } else if (width.value > 450) {
+    return 'tablet';
+  } else {
+    return 'mobile';
+  }
 });
 </script>
 
 <style scoped>
 header {
   position: relative;
-  background: var(--color-black-100);
   padding: var(--content-padding);
-  z-index: 0;
+  background: var(--color-black-100);
 }
 .home {
   background: var(--color-black-200);
-  height: 690px;
 }
-.logo {
-  cursor: pointer;
+@media only screen and (max-width: 1000px) {
 }
-.main {
-  display: flex;
-  padding: 0 1rem;
-  justify-content: space-between;
-  align-items: center;
-  height: var(--header-height);
-  border-bottom: 1px solid hsla(0, 0%, 50%, 0.3);
-}
-.product-image {
-  position: absolute;
-  width: 1400px;
-  top: -30px;
-  right: 150px;
-  height: max-content;
-  z-index: -1;
-}
-nav {
-  display: flex;
-  gap: 1rem;
-}
-a {
-  color: var(--color-white-100);
-  text-decoration: none;
-  font-size: 15px;
-  letter-spacing: 3px;
-  transition: 0.2s ease;
-}
-a:hover {
-  color: var(--color-main-100);
-}
-.selected-page {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem 0;
-}
-.home .selected-page {
-  display: block;
-}
-h2 {
-  color: var(--color-white-100);
-  font-size: 35px;
-  font-weight: 700;
-}
-.logo {
-  width: 150px;
-  object-fit: contain;
+@media only screen and (max-width: 450px) {
+  header {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 </style>

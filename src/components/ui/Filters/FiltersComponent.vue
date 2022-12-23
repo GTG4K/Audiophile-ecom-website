@@ -30,9 +30,21 @@ const categories = reactive([
 
 <style scoped>
 .categories {
-  margin-top: 10rem;
+  margin-top: 8rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+}
+@media only screen and (max-width: 1000px) {
+  .categories {
+    gap: 1rem;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .categories {
+    margin-top: 4rem;
+    grid-template-columns: 1fr;
+  }
 }
 </style>

@@ -21,6 +21,7 @@ import { ref, reactive, computed, watch } from 'vue';
 
   --color-black-100: hsl(0, 0%, 0%);
   --color-black-200: hsl(0, 3%, 10%);
+  --color-black-200-backdrop: hsl(0, 3%, 10%, 0.6);
   --color-black-200-shadow: hsl(0, 3%, 10%, 0.2);
 
   --color-white-100: hsl(0, 0%, 100%);
@@ -34,7 +35,7 @@ import { ref, reactive, computed, watch } from 'vue';
   --color-none: hsl(0, 0%, 0%, 0);
 
   --header-height: 90px;
-  --content-padding: 0 20rem;
+  --content-padding: 0 14rem;
 }
 body {
   overflow-x: hidden;
@@ -51,6 +52,11 @@ body {
 @media only screen and (max-width: 1200px) {
   :root {
     --content-padding: 0 3rem;
+  }
+}
+@media only screen and (max-width: 900px) {
+  :root {
+    --content-padding: 0 1rem;
   }
 }
 </style>

@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import CartProduct from '../header/CartProduct.vue';
+import CartProduct from '../header/cart/CartProduct.vue';
 import { useStore } from 'vuex';
 import { computed } from 'vue';
 

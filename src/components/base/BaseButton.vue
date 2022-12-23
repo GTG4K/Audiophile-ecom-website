@@ -72,6 +72,7 @@ button {
 }
 .light {
   background: none;
+  height: fit-content;
   color: var(--color-white-500);
 }
 .light:hover {
