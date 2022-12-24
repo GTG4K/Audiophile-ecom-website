@@ -1,7 +1,7 @@
 <template>
   <!-- Desktop -->
   <div class="header" :class="headerClasses" v-if="props.size == 'desktop'">
-    <img src="../../../assets/shared/desktop/logo.svg" alt="" />
+    <img src="../../../assets/shared/desktop/logo.svg" alt="" @click="goHome" />
     <nav>
       <router-link to="/home">HOME</router-link>
       <router-link to="/category/headphones">HEADPHONES</router-link>

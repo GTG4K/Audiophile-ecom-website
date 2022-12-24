@@ -27,7 +27,7 @@
         <h2 class="price">${{ grandTotal }}</h2>
       </div>
     </div>
-    <div class="action">
+    <div class="action" @click="emit('toggleDialog')">
       <base-button theme="main" size="full">CONTINUE & PAY</base-button>
     </div>
   </div>
@@ -39,6 +39,7 @@ import { useStore } from 'vuex';
 import { computed } from 'vue';
 
 const store = useStore();
+const emit = defineEmits(['toggleDialog']);
 
 const cartProducts = computed(() => {
   return store.getters.getCart;
@@ -58,7 +59,7 @@ const vat = computed(() => {
 });
 
 const grandTotal = computed(() => {
-  return Math.floor(rawTotal.value + (rawTotal.value / 100) * 20 + 50);
+  return Math.floor(rawTotal.value + vat.value + 50);
 });
 </script>
 

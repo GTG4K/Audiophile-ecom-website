@@ -16,7 +16,10 @@
       <h2 class="price">${{ cartPrice }}</h2>
     </div>
     <div class="action" @click="emitToggle">
-      <base-button theme="main" size="full" redirect="/checkout">CHECKOUT</base-button>
+      <base-button v-if="cartLength > 0" theme="main" size="full" redirect="/checkout"
+        >CHECKOUT</base-button
+      >
+      <base-button v-else theme="dark" size="full">CART EMPTY</base-button>
     </div>
   </div>
 </template>
