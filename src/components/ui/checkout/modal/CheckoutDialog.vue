@@ -123,6 +123,8 @@ const isActive = computed(() => {
 .cart-products {
   padding: 0.5rem 1.5rem;
   background: var(--color-white-200);
+  max-height: 300px;
+  overflow: scroll;
 }
 .total {
   padding: 2rem 1.5rem;

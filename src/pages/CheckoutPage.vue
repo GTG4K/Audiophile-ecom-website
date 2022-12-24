@@ -15,7 +15,7 @@ import CheckoutSummary from '../components/ui/checkout/CheckoutSummary.vue';
 import CheckoutDialog from '../components/ui/checkout/modal/CheckoutDialog.vue';
 import { ref } from 'vue';
 
-const dialogActive = ref(true);
+const dialogActive = ref(false);
 
 function toggleDialog() {
   dialogActive.value = !dialogActive.value;
