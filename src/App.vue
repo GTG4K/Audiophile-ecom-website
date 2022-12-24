@@ -37,6 +37,7 @@ import { ref, reactive, computed, watch } from 'vue';
   --category-view-padding: 4rem 0 0 0;
   --header-height: 90px;
   --content-padding: 0 14rem;
+  --error-color: hsl(0, 65%, 49%);
 }
 body {
   overflow-x: hidden;

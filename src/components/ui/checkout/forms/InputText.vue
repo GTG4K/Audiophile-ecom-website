@@ -1,13 +1,33 @@
 <template>
-  <div class="form-body">
+  <div class="form-body" :class="inputClass">
     <label for="">{{ props.title }}</label>
-    <input :type="props.type" :placeholder="props.placeholder" />
-    <span>{{ errorMessage }}</span>
+    <input
+      :type="props.type"
+      :placeholder="props.placeholder"
+      :value="inputValue"
+      @input="updateInput"
+      @blur="sendInput"
+    />
+    <span v-if="error">{{ error }}</span>
   </div>
 </template>
 
 <script setup>
-const props = defineProps(['type', 'placeholder', 'title']);
+import { ref, computed } from 'vue';
+const props = defineProps(['type', 'placeholder', 'title', 'modelValue', 'error']);
+const emit = defineEmits(['update:modelValue']);
+
+const inputValue = ref(props.modelValue);
+
+const inputClass = computed(() => {
+  return { invalid: props.error };
+});
+function updateInput(e) {
+  inputValue.value = e.target.value;
+}
+function sendInput() {
+  emit('update:modelValue', inputValue.value);
+}
 </script>
 
 <style scoped>
@@ -33,5 +53,18 @@ input:hover {
 input:active,
 input:focus {
   border-color: var(--color-main-100);
+}
+
+.invalid input {
+  border-color: var(--error-color);
+}
+.invalid label {
+  color: var(--error-color);
+  font-weight: 600;
+}
+span {
+  color: var(--error-color);
+  font-size: 12px;
+  font-weight: 600;
 }
 </style>

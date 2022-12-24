@@ -4,16 +4,26 @@
     <div class="form-component">
       <h2>BILLING DETAILS</h2>
       <div class="form-duo">
-        <input-text type="text" placeholder="Saiki kusuo" title="Name"></input-text>
+        <input-text
+          type="text"
+          placeholder="Saiki kusuo"
+          title="Name"
+          v-model="inputName.value"
+          :error="inputName.error"
+        ></input-text>
         <input-text
           type="email"
           placeholder="teruhashi@que.en"
           title="Email Address"
+          v-model="inputEmail.value"
+          :error="inputEmail.error"
         ></input-text>
         <input-text
           type="number"
           placeholder="+1 222-555-0136"
           title="Phone number"
+          v-model="inputMobile.value"
+          :error="inputMobile.error"
         ></input-text>
       </div>
     </div>
@@ -24,12 +34,32 @@
           type="text"
           placeholder="1137 Williams Avenue"
           title="Address"
+          v-model="inputAddress.value"
+          :error="inputAddress.error"
         ></input-text>
       </div>
       <div class="form-duo">
-        <input-text type="text" placeholder="10001" title="ZIP Code"></input-text>
-        <input-text type="text" placeholder="New York" title="City"></input-text>
-        <input-text type="text" placeholder="United States" title="Country"></input-text>
+        <input-text
+          type="text"
+          placeholder="10001"
+          title="ZIP Code"
+          v-model="inputZip.value"
+          :error="inputZip.error"
+        ></input-text>
+        <input-text
+          type="text"
+          placeholder="New York"
+          title="City"
+          v-model="inputCity.value"
+          :error="inputCity.error"
+        ></input-text>
+        <input-text
+          type="text"
+          placeholder="United States"
+          title="Country"
+          v-model="inputCountry.value"
+          :error="inputCountry.error"
+        ></input-text>
       </div>
     </div>
     <div class="form-component">
@@ -44,13 +74,21 @@
           v-model="payment"
         ></input-radio>
       </div>
-      <div class="form-duo">
+      <div class="form-duo" v-if="payment === 'emoney'">
         <input-text
           type="number"
           placeholder="238521993"
           title="e-Money Number"
+          v-model="inputEmoney.value"
+          :error="inputEmoney.error"
         ></input-text>
-        <input-text type="number" placeholder="6891" title="e-Money PIN"></input-text>
+        <input-text
+          type="number"
+          placeholder="6891"
+          title="e-Money PIN"
+          v-model="inputEpin.value"
+          :error="inputEpin.error"
+        ></input-text>
       </div>
     </div>
   </div>
@@ -59,9 +97,103 @@
 <script setup>
 import InputText from './forms/InputText.vue';
 import InputRadio from './forms/InputRadio.vue';
-import { ref } from 'vue';
+import { ref, reactive, watch } from 'vue';
+
+const inputName = reactive({ value: '', valid: null, error: null });
+const inputEmail = reactive({ value: '', valid: null, error: null });
+const inputMobile = reactive({ value: '', valid: null, error: null });
+const inputAddress = reactive({ value: '', valid: null, error: null });
+const inputZip = reactive({ value: '', valid: null, error: null });
+const inputCity = reactive({ value: '', valid: null, error: null });
+const inputCountry = reactive({ value: '', valid: null, error: null });
+const inputEmoney = reactive({ value: '', valid: null, error: null });
+const inputEpin = reactive({ value: '', valid: null, error: null });
 
 const payment = ref('emoney');
+
+const validateFilled = function (input) {
+  if (input.value.length > 0) {
+    input.valid = true;
+    input.error = null;
+  } else {
+    input.valid = false;
+    input.error = 'Make sure to fill in the form';
+  }
+};
+const validateEmail = function (input) {
+  if (input.valid) {
+    // check the amount of @ Symbols
+    let atAmount = 0;
+    for (let i = 0; i < input.value.length; i++) {
+      if (input.value[i] === '@') {
+        atAmount++;
+      }
+    }
+    if (atAmount != 1) {
+      input.valid = false;
+      input.error = 'make sure the email is formatted correctly';
+      return;
+    } else {
+      input.valid = true;
+      input.error = null;
+    }
+
+    //Check for correct formatting
+    const [name, at] = input.value.split('@');
+    if (name.length === 0 || at.length === 0) {
+      input.valid = false;
+      input.error = 'make sure the email is formatted correctly';
+    } else {
+      input.valid = true;
+      input.error = null;
+    }
+
+    //check for dot after 2 sign
+    let containsDot = false;
+    for (let i = 0; i < at.length; i++) {
+      if (at[i] === '.') {
+        containsDot = true;
+      }
+    }
+    if (containsDot === false) {
+      input.valid = false;
+      input.error = 'make sure the email is formatted correctly';
+    } else {
+      input.valid = true;
+      input.error = null;
+    }
+  }
+};
+
+// watch input changes
+watch(inputName, () => {
+  validateFilled(inputName);
+});
+watch(inputEmail, () => {
+  validateFilled(inputEmail);
+  validateEmail(inputEmail);
+});
+watch(inputMobile, () => {
+  validateFilled(inputMobile);
+});
+watch(inputAddress, () => {
+  validateFilled(inputAddress);
+});
+watch(inputZip, () => {
+  validateFilled(inputZip);
+});
+watch(inputCity, () => {
+  validateFilled(inputCity);
+});
+watch(inputCountry, () => {
+  validateFilled(inputCountry);
+});
+watch(inputEmoney, () => {
+  validateFilled(inputEmoney);
+});
+watch(inputEpin, () => {
+  validateFilled(inputEpin);
+});
 </script>
 
 <style scoped>
